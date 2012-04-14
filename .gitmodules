@@ -91,3 +91,6 @@
 [submodule "bundle/vim-dbext"]
 	path = bundle/vim-dbext
 	url = https://github.com/edsono/vim-dbext.git
+[submodule "bundle/vim-commentary"]
+	path = bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git

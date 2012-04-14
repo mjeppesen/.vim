@@ -7,7 +7,7 @@ set nocompatible
 
 " Pathogen plugin management {
 runtime bundle/vim-pathogen/autoload/pathogen.vim
-let g:pathogen_disabled = ['Gist.vim', 'Zenburn', 'tabular', 'tcomment_vim', 'textile.vim', 'vim-fuzzyfinder', 'vim-ruby-debugger', 'vim-tmux']
+let g:pathogen_disabled = ['gist', 'zenburn', 'tabular', 'tcomment', 'textile', 'vim-tmux']
 call pathogen#infect()
 call pathogen#helptags()
 " }
