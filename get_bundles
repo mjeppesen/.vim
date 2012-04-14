@@ -39,3 +39,10 @@ git_bundles.each do |url|
   puts "Adding submodule #{url} into #{dir}"
   `git submodule add #{url} bundle/#{dir}`
 end
+
+
+# git submodule add git@github.com:matthewjeppesen/pgsql.vim.git bundle/vim-pgsql
+# git submodule add https://github.com/twerth/ir_black.git bundle/ir_black
+# git submodule add https://github.com/edsono/vim-dbext.git bundle/vim-dbext
+# git submodule add https://github.com/tpope/vim-commentary.git bundle/vim-commentary
+# git submodule add https://github.com/ervandew/supertab.git bundle/supertab
