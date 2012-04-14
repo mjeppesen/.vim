@@ -120,10 +120,10 @@ set gdefault " the /g flag on :s substitutions by default
 " Formatting {
 set nowrap " wrap long lines
 set autoindent " indent at the same level of the previous line
-set shiftwidth=4 " use indents of 4 spaces
+set shiftwidth=2 " use indents of spaces
 set expandtab " tabs are spaces, not tabs
-set tabstop=4 " an indentation every four columns
-set softtabstop=4 " let backspace delete indent
+set tabstop=2 " an indentation every four columns
+set softtabstop=2 " let backspace delete indent
 set formatoptions+=tcroql " copied from gvimrc -- not sure
 " set matchpairs+=<:> " match, to be used with %
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
