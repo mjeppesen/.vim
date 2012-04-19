@@ -84,7 +84,7 @@
 	url = git://github.com/vim-scripts/jQuery.git
 [submodule "bundle/vim-pgsql"]
 	path = bundle/vim-pgsql
-	url = git@github.com:matthewjeppesen/pgsql.vim.git
+	url = git@github.com:mjeppesen/pgsql.vim.git
 [submodule "bundle/ir_black"]
 	path = bundle/ir_black
 	url = https://github.com/twerth/ir_black.git
