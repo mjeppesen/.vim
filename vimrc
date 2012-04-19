@@ -7,7 +7,9 @@ set nocompatible
 
 " Pathogen plugin management {
 runtime bundle/vim-pathogen/autoload/pathogen.vim
-let g:pathogen_disabled = ['gist', 'zenburn', 'tabular', 'tcomment', 'textile', 'vim-tmux']
+" Disable these plugins. (Note that vim-ruby-debugger needs a gem and overrides
+" <Leader>t among others)
+let g:pathogen_disabled = ['gist', 'zenburn', 'tabular', 'tcomment', 'textile', 'vim-tmux', 'vim-ruby-debugger']
 call pathogen#infect()
 call pathogen#helptags()
 " }
@@ -191,11 +193,11 @@ cnoremap  <Up>
 "nmap <leader>f9 :set foldlevel=9<CR>
 
 "clearing highlighted search
-    nmap <silent> <leader>/ :nohlsearch<CR>
+nmap <silent> <leader>/ :nohlsearch<CR>
 
 " Shortcuts
 " Change Working Directory to that of the current file
-    cmap cwd lcd %:p:h
+cmap cwd lcd %:p:h
 cmap cd. lcd %:p:h
 
 " visual shifting (does not exit Visual mode)
@@ -239,6 +241,8 @@ let g:CommandTMatchWindowReverse=1
 " autocmd VimEnter * silent NERDTree
 " autocmd BufEnter * silent NERDTreeMirror
 
+" Turn NERDTree on and off. Suggested by vim-nerdtree-tabs plugin
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " autocmd VimEnter * silent wincmd w
 " }
 
