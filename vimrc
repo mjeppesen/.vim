@@ -243,6 +243,9 @@ let g:CommandTMatchWindowReverse=1
 
 " Turn NERDTree on and off. Suggested by vim-nerdtree-tabs plugin
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
+" NERDTree not open on startup
+let g:nerdtree_tabs_open_on_gui_startup = 0
+
 " autocmd VimEnter * silent wincmd w
 " }
 
