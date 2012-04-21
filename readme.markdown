@@ -4,10 +4,12 @@ This is mainly on github for my benefit, so I can clone my setup / have backups 
 
 If you're starting with vim, you could clone my setup you could do (on mac /
 linux) ...
+```bash
     mkdir ~/.vim
     cd ~/.vim
     git clone --recursive https://mjeppesen@github.com/mjeppesen/.vim.git
     ln -s ~/.vim/vimrc ~/.vimrc
+```
 
 ... but honestly, you probably don't want to because there are lots of vim
 configs on github, written by people who are much smarter than me, who know vim better, and who have put
