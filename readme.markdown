@@ -2,8 +2,8 @@
 
 This is mainly on github for my benefit, so I can clone my setup / have backups etc.
 
-If you're starting with vim, you could clone my setup you could do (on mac /
-linux) ...
+If you're starting with vim, you could clone my setup you *could* ( on mac /
+linux) with ...
 ```bash
     mkdir ~/.vim
     cd ~/.vim
@@ -16,7 +16,7 @@ configs on github, written by people who are much smarter than me, who know vim 
 effort into testing it on different platforms and machines.
 
 So google "vim config" or look at:
-http://spf13.com/post/spf13-vim-3-0-release-and-new-website
+http://vim.spf13.com/
 (which is where I took a lot of the vimrc commands).
 
 
