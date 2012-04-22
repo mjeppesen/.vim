@@ -215,7 +215,6 @@ imap [H g0
 " }
 
 " GUI Settings {
-" GVIM- (here instead of .gvimrc)
 if has('gui_running')
     set guioptions-=T " remove the toolbar
     set guioptions-=r " remove the scrollbar
@@ -231,6 +230,16 @@ set term=builtin_ansi " Make arrow and other keys work
 endif
 
 set vb t_vb=  "stupid bell gone
+
+" Macvim: run these commands from the terminal if tab names are being
+" abbreviated (adjust numbers as necessary):
+"
+" defaults write org.vim.MacVim MMTabMinWidth 150
+" defaults write org.vim.MacVim MMTabOptimumWidth 200
+" defaults write org.vim.MacVim MMTabMaxWidth 500
+"
+" see:
+" http://stackoverflow.com/questions/10259413/macvim-how-to-prevent-tab-names-being-abbreviated
 
 " }
 
