@@ -164,8 +164,9 @@ nnoremap k gk
 
 " The following two lines conflict with moving to top and bottom of the screen
 " If you prefer that functionality, comment them out.
-map <S-H> gT
-map <S-L> gt
+" map <S-H> gT
+" map <S-L> gt
+nnoremap gr gT
 
 " Stupid shift key fixes
 cmap W w
@@ -219,7 +220,7 @@ if has('gui_running')
     set guioptions-=T " remove the toolbar
     set guioptions-=r " remove the scrollbar
     set guioptions-=L " remove the left scrollbar
-    set guifont=Consolas:h17
+    set guifont=Consolas:h19
     "set guifont=Monaco:h14
     "set guifont=Menlo\ Regular:h15
     set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
@@ -255,7 +256,50 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " NERDTree not open on startup
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
+" tagbar
+nnoremap <silent> <Leader>tt :TagbarToggle<CR>
+
 " autocmd VimEnter * silent wincmd w
+" }
+
+" Functions {
+
+" This doesn't work -- messes up syntax highlighting etc
+" Close all buffers not visible in a window or tab somewhere
+" usage :call Wipeout()
+function! Wipeout()
+  " list of *all* buffer numbers
+  let l:buffers = range(1, bufnr('$'))
+
+  " what tab page are we in?
+  let l:currentTab = tabpagenr()
+  try
+    " go through all tab pages
+    let l:tab = 0
+    while l:tab < tabpagenr('$')
+      let l:tab += 1
+
+      " go through all windows
+      let l:win = 0
+      while l:win < winnr('$')
+        let l:win += 1
+        " whatever buffer is in this window in this tab, remove it from
+        " l:buffers list
+        let l:thisbuf = winbufnr(l:win)
+        call remove(l:buffers, index(l:buffers, l:thisbuf))
+      endwhile
+    endwhile
+
+    " if there are any buffers left, delete them
+    if len(l:buffers)
+      execute 'bwipeout' join(l:buffers)
+    endif
+  finally
+    " go back to our original tab page
+    execute 'tabnext' l:currentTab
+  endtry
+endfunction
+
 " }
 
 " Custom menus to help me remember {
