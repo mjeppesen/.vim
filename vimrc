@@ -9,7 +9,7 @@ set nocompatible
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 " Disable these plugins. (Note that vim-ruby-debugger needs a gem and overrides
 " <Leader>t among others)
-let g:pathogen_disabled = ['gist', 'zenburn', 'tabular', 'tcomment', 'textile', 'vim-tmux', 'vim-ruby-debugger']
+let g:pathogen_disabled = ['gist', 'zenburn', 'tabular', 'tcomment', 'textile', 'vim-tmux', 'vim-ruby-debugger', 'command-t']
 call pathogen#infect()
 call pathogen#helptags()
 " }
