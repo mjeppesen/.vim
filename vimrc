@@ -78,8 +78,8 @@ set tabpagemax=15 " only show 15 tabs
 set showmode " display the current mode
 
 set cursorline " highlight current line
-hi cursorline guibg=#333333 " highlight bg color of current line
-hi CursorColumn guibg=#333333 " highlight cursor
+" hi cursorline guibg=#333333 " highlight bg color of current line
+" hi CursorColumn guibg=#333333 " highlight cursor
 
 if has('cmdline_info')
 set ruler " show the ruler
@@ -231,7 +231,10 @@ if has('gui_running')
 
 "set lines=40 " 40 lines of text instead of 24,
 else
-set term=builtin_ansi " Make arrow and other keys work
+  set term=builtin_ansi " Make arrow and other keys work
+  set t_Co=256 " 256 colors
+  set background=dark
+  color grb256
 endif
 
 set vb t_vb=  "stupid bell gone
