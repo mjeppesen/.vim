@@ -9,7 +9,7 @@ set nocompatible
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 " Disable these plugins. (Note that vim-ruby-debugger needs a gem and overrides
 " <Leader>t among others)
-let g:pathogen_disabled = ['gist', 'zenburn', 'tabular', 'tcomment', 'textile', 'vim-tmux', 'vim-ruby-debugger', 'command-t']
+let g:pathogen_disabled = ['gist', 'zenburn', 'tcomment', 'textile', 'vim-tmux', 'vim-ruby-debugger', 'command-t']
 call pathogen#infect()
 call pathogen#helptags()
 " }
@@ -41,14 +41,18 @@ set history=1000 " Store a ton of history (default is 20)
 set nospell " spell checking off
 " Setting up the directories {
 set backup " backups are nice ...
-set undofile " so is persistent undo ...
 set undolevels=1000 "maximum number of changes that can be undone
+
+if version >= 720
+set undofile " so is persistent undo ...
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+set undodir=$HOME/.vimundo/ " and for undo files
+endif 
+
 " Moved to function at bottom of the file
 set backupdir=$HOME/.vimbackup/ " but not when they clog
 set directory=$HOME/.vimswap/ " Same for swap files
 set viewdir=$HOME/.vimviews/ " same for view files
-set undodir=$HOME/.vimundo/ " and for undo files
 " set undo
 "" Creating directories if they don't exist
 silent execute '!mkdir -p $HVOME/.vimbackup'
@@ -85,16 +89,16 @@ set showcmd " show partial commands in status line and
 endif
 
 if has('statusline')
-        set laststatus=2
+  set laststatus=2
 
-" Broken down into easily includeable segments
-set statusline=%<%f\ " Filename
-set statusline+=%w%h%m%r " Options
-set statusline+=%{fugitive#statusline()} " Git Hotness
-set statusline+=\ [%{&ff}/%Y] " filetype
-set statusline+=\ [%{getcwd()}] " current dir
-"set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
-set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
+  " Broken down into easily includeable segments
+  set statusline=%<%f\ " Filename
+  set statusline+=%w%h%m%r " Options
+  set statusline+=%{fugitive#statusline()} " Git Hotness
+  set statusline+=\ [%{&ff}/%Y] " filetype
+  set statusline+=\ [%{getcwd()}] " current dir
+  "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
+  set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
 
 set backspace=indent,eol,start " backspace for dummys
@@ -245,7 +249,8 @@ set vb t_vb=  "stupid bell gone
 " }
 
 " Plugin management {
-let g:CommandTMatchWindowReverse=1
+" " Command-t
+" let g:CommandTMatchWindowReverse=1
 
 " " Make NERDTree's menu in each tab
 " autocmd VimEnter * silent NERDTree
