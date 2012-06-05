@@ -17,7 +17,7 @@ call pathogen#helptags()
 filetype plugin on
 syntax on
 
-" Most of the following from from spf13's vimrc
+" Most of the following from from spf13 and Gary Bernhardt's vimrc
 
 " General {
 set background=dark " Assume a dark background
@@ -91,7 +91,10 @@ endif
 if has('statusline')
   set laststatus=2
 
-  " Broken down into easily includeable segments
+  " Gary Bernhardt's statusline:
+  " set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+
+  " spft13 statusline: Broken down into easily includeable segments
   set statusline=%<%f\ " Filename
   set statusline+=%w%h%m%r " Options
   set statusline+=%{fugitive#statusline()} " Git Hotness
@@ -180,8 +183,13 @@ cmap Q q
 cmap Tabe tabe
 
 " Use <C-O> instead of <Up> on command line
-
 cnoremap  <Up>
+
+
+" gbr: User ,, to swap between last two files
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 "nnoremap Y y$
@@ -198,7 +206,7 @@ cnoremap  <Up>
 "nmap <leader>f9 :set foldlevel=9<CR>
 
 "clearing highlighted search
-nmap <silent> <leader>/ :nohlsearch<CR>
+nnoremap <silent> <cr> :nohlsearch<CR>
 
 " Shortcuts
 " Change Working Directory to that of the current file
