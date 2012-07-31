@@ -35,6 +35,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " call add(g:pathogen_disabled, 'vim-repeat')
 " call add(g:pathogen_disabled, 'vim-ruby')
 " call add(g:pathogen_disabled, 'vim-snipmate')
+" call add(g:pathogen_disabled, 'vim-surround')
 " call add(g:pathogen_disabled, 'vim-textobj-rubyblock')
 " call add(g:pathogen_disabled, 'vim-textobj-user')
 " call add(g:pathogen_disabled, 'vim-unimpaired')
@@ -43,18 +44,17 @@ call add(g:pathogen_disabled, 'command-t')
 call add(g:pathogen_disabled, 'gist')
 call add(g:pathogen_disabled, 'jquery')
 call add(g:pathogen_disabled, 'neocomplcache')
-call add(g:pathogen_disabled, 'nerdtree')
+" call add(g:pathogen_disabled, 'nerdtree')
+" call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
 call add(g:pathogen_disabled, 'tabular')
 call add(g:pathogen_disabled, 'tcomment')
 call add(g:pathogen_disabled, 'textile')
 call add(g:pathogen_disabled, 'vim-cucumber')
 call add(g:pathogen_disabled, 'vim-dbext')
 call add(g:pathogen_disabled, 'vim-javascript')
-call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
 call add(g:pathogen_disabled, 'vim-pgsql')
 call add(g:pathogen_disabled, 'vim-ruby-debugger')
 call add(g:pathogen_disabled, 'vim-shoulda')
-call add(g:pathogen_disabled, 'vim-surround')
 call add(g:pathogen_disabled, 'vim-tmux')
 
 call pathogen#infect()
@@ -93,10 +93,10 @@ set undolevels=1000 "maximum number of changes that can be undone
 set splitright " split buffers to the right
 set splitbelow " vertical split buffers below
 
-if version >= 720
-set undofile " so is persistent undo ...
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-set undodir=$HOME/.vimundo/ " and for undo files
+if has('persistent_undo')
+  set undofile " so is persistent undo ...
+  set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+  set undodir=$HOME/.vimundo/ " and for undo files
 endif 
 
 " Moved to function at bottom of the file
@@ -122,8 +122,6 @@ endif
 " }
 
 " Vim UI {
-"color ir_black " load a colorscheme
-color solarized
 set tabpagemax=15 " only show 15 tabs
 set showmode " display the current mode
 
@@ -140,18 +138,19 @@ endif
 
 if has('statusline')
   set laststatus=2
+  set statusline=\ \ %<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
   " Gary Bernhardt's statusline:
   " set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
   " spft13 statusline: Broken down into easily includeable segments
-  set statusline=%<%f\ " Filename
-  set statusline+=%w%h%m%r " Options
-  set statusline+=%{fugitive#statusline()} " Git Hotness
-  set statusline+=\ [%{&ff}/%Y] " filetype
-  set statusline+=\ [%{getcwd()}] " current dir
-  "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
-  set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
+  " set statusline=%<%f\ " Filename
+  " set statusline+=%w%h%m%r " Options
+  " set statusline+=%{fugitive#statusline()} " Git Hotness
+  " set statusline+=\ [%{&ff}/%Y] " filetype
+  " set statusline+=\ [%{getcwd()}] " current dir
+  " "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
+  " set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
 
 set backspace=indent,eol,start " backspace for dummys
@@ -233,8 +232,7 @@ cmap Q q
 cmap Tabe tabe
 
 " Use <C-O> instead of <Up> on command line
-cnoremap  <Up>
-
+cnoremap <C-O> <Up>
 
 " gbr: User ,, to swap between last two files
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -242,6 +240,9 @@ map <leader>e :edit %%
 map <leader>v :view %%
 
 nnoremap <Leader><Leader> <C-^> % go to previously edited file
+
+"  insert the time in "03 Jan 2012" format
+command! InsertDate :normal a<c-r>=strftime('%d %b %Y')<cr>
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 "nnoremap Y y$
@@ -285,6 +286,7 @@ if has('gui_running')
     set guioptions-=r " remove the scrollbar
     set guioptions-=L " remove the left scrollbar
     set guifont=Consolas:h19
+    color solarized
     "set guifont=Monaco:h14
     "set guifont=Menlo\ Regular:h15
     set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
@@ -293,8 +295,24 @@ if has('gui_running')
 else
   set term=builtin_ansi " Make arrow and other keys work
   set t_Co=256 " 256 colors
-  set background=dark
-  color grb256
+
+
+  " change cursor shape depending on mode
+  " only works in iTerm
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+  " set vim colors same as terminal (FRAGILE)
+  if $ITERM_PROFILE == 'Pastel'
+    color grb256
+    set background=dark
+  elseif $ITERM_PROFILE == 'Solarized Dark'
+    color solarized
+    set background=dark
+  else  " some good default
+    colo ir_black
+    set background=dark
+  endif
 endif
 
 set vb t_vb=  "stupid bell gone
@@ -332,41 +350,63 @@ nnoremap <silent> <Leader>tt :TagbarToggle<CR>
 
 " Functions {
 
+
+function! EditTextLikeConventionalEditors()
+  set textwidth=0
+  set wrap
+  set linebreak
+  set nolist " linebreak does not work if list is on
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
 " This doesn't work -- messes up syntax highlighting etc
 " Close all buffers not visible in a window or tab somewhere
 " usage :call Wipeout()
-function! Wipeout()
-  " list of *all* buffer numbers
-  let l:buffers = range(1, bufnr('$'))
+" function! Wipeout()
+"   " list of *all* buffer numbers
+"   let l:buffers = range(1, bufnr('$'))
 
-  " what tab page are we in?
-  let l:currentTab = tabpagenr()
-  try
-    " go through all tab pages
-    let l:tab = 0
-    while l:tab < tabpagenr('$')
-      let l:tab += 1
+"   " what tab page are we in?
+"   let l:currentTab = tabpagenr()
+"   try
+"     " go through all tab pages
+"     let l:tab = 0
+"     while l:tab < tabpagenr('$')
+"       let l:tab += 1
 
-      " go through all windows
-      let l:win = 0
-      while l:win < winnr('$')
-        let l:win += 1
-        " whatever buffer is in this window in this tab, remove it from
-        " l:buffers list
-        let l:thisbuf = winbufnr(l:win)
-        call remove(l:buffers, index(l:buffers, l:thisbuf))
-      endwhile
-    endwhile
+"       " go through all windows
+"       let l:win = 0
+"       while l:win < winnr('$')
+"         let l:win += 1
+"         " whatever buffer is in this window in this tab, remove it from
+"         " l:buffers list
+"         let l:thisbuf = winbufnr(l:win)
+"         call remove(l:buffers, index(l:buffers, l:thisbuf))
+"       endwhile
+"     endwhile
 
-    " if there are any buffers left, delete them
-    if len(l:buffers)
-      execute 'bwipeout' join(l:buffers)
-    endif
-  finally
-    " go back to our original tab page
-    execute 'tabnext' l:currentTab
-  endtry
-endfunction
+"     " if there are any buffers left, delete them
+"     if len(l:buffers)
+"       execute 'bwipeout' join(l:buffers)
+"     endif
+"   finally
+"     " go back to our original tab page
+"     execute 'tabnext' l:currentTab
+"   endtry
+" endfunction
 
 " }
 
