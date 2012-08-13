@@ -238,8 +238,8 @@ cnoremap <C-O> <Up>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
-
-nnoremap <Leader><Leader> <C-^> % go to previously edited file
+" go to previously edited file
+nnoremap <leader><Leader> <C-^>
 
 "  insert the time in "03 Jan 2012" format
 command! InsertDate :normal a<c-r>=strftime('%d %b %Y')<cr>
