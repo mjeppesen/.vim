@@ -42,7 +42,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " call add(g:pathogen_disabled, 'vim-vividchalk')
 call add(g:pathogen_disabled, 'command-t')
 call add(g:pathogen_disabled, 'gist')
-call add(g:pathogen_disabled, 'jquery')
+" call add(g:pathogen_disabled, 'jquery')
 call add(g:pathogen_disabled, 'neocomplcache')
 " call add(g:pathogen_disabled, 'nerdtree')
 " call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
@@ -51,10 +51,10 @@ call add(g:pathogen_disabled, 'tcomment')
 call add(g:pathogen_disabled, 'textile')
 call add(g:pathogen_disabled, 'vim-cucumber')
 call add(g:pathogen_disabled, 'vim-dbext')
-call add(g:pathogen_disabled, 'vim-javascript')
+" call add(g:pathogen_disabled, 'vim-javascript')
 call add(g:pathogen_disabled, 'vim-pgsql')
 call add(g:pathogen_disabled, 'vim-ruby-debugger')
-call add(g:pathogen_disabled, 'vim-shoulda')
+call add(g:pathogen_disabled, 'vim-shuoulda')
 call add(g:pathogen_disabled, 'vim-tmux')
 
 call pathogen#infect()
@@ -187,7 +187,7 @@ set formatoptions+=tcroql " copied from gvimrc -- not sure
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml,ruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
 " }
 
@@ -350,12 +350,12 @@ nnoremap <silent> <Leader>tt :TagbarToggle<CR>
 
 " Functions {
 
-
 function! EditTextLikeConventionalEditors()
   set textwidth=0
   set wrap
   set linebreak
   set nolist " linebreak does not work if list is on
+  set spell
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
