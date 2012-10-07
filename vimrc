@@ -12,19 +12,19 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " I should make a vimscript function, but aaargh learning vimscript.
  let g:pathogen_disabled = []
 
-" call add(g:pathogen_disabled, 'ctrlp.vim')
+call add(g:pathogen_disabled, 'ctrlp.vim')
 " call add(g:pathogen_disabled, 'indexedsearch')
 " call add(g:pathogen_disabled, 'ir_black')
 " call add(g:pathogen_disabled, 'mjeppesen')
-" call add(g:pathogen_disabled, 'snipmate-snippets')
+call add(g:pathogen_disabled, 'snipmate-snippets')
 " call add(g:pathogen_disabled, 'supertab')
 " call add(g:pathogen_disabled, 'syntastic')
-" call add(g:pathogen_disabled, 'tagbar')
+call add(g:pathogen_disabled, 'tagbar')
 " call add(g:pathogen_disabled, 'tlib_vim')
 " call add(g:pathogen_disabled, 'vim-addon-mw-utils')
 " call add(g:pathogen_disabled, 'vim-colors-solarized')
 " call add(g:pathogen_disabled, 'vim-commentary')
-" call add(g:pathogen_disabled, 'vim-endwise')
+call add(g:pathogen_disabled, 'vim-endwise')
 " call add(g:pathogen_disabled, 'vim-fugitive')
 " call add(g:pathogen_disabled, 'vim-git')
 " call add(g:pathogen_disabled, 'vim-haml')
@@ -34,24 +34,24 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " call add(g:pathogen_disabled, 'vim-rails')
 " call add(g:pathogen_disabled, 'vim-repeat')
 " call add(g:pathogen_disabled, 'vim-ruby')
-" call add(g:pathogen_disabled, 'vim-snipmate')
+call add(g:pathogen_disabled, 'vim-snipmate')
 " call add(g:pathogen_disabled, 'vim-surround')
 " call add(g:pathogen_disabled, 'vim-textobj-rubyblock')
 " call add(g:pathogen_disabled, 'vim-textobj-user')
 " call add(g:pathogen_disabled, 'vim-unimpaired')
-" call add(g:pathogen_disabled, 'vim-vividchalk')
-call add(g:pathogen_disabled, 'command-t')
+call add(g:pathogen_disabled, 'vim-vividchalk')
+" call add(g:pathogen_disabled, 'command-t')
 call add(g:pathogen_disabled, 'gist')
-" call add(g:pathogen_disabled, 'jquery')
+call add(g:pathogen_disabled, 'jquery')
 call add(g:pathogen_disabled, 'neocomplcache')
-" call add(g:pathogen_disabled, 'nerdtree')
-" call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
+call add(g:pathogen_disabled, 'nerdtree')
+call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
 call add(g:pathogen_disabled, 'tabular')
 call add(g:pathogen_disabled, 'tcomment')
 call add(g:pathogen_disabled, 'textile')
 call add(g:pathogen_disabled, 'vim-cucumber')
 call add(g:pathogen_disabled, 'vim-dbext')
-" call add(g:pathogen_disabled, 'vim-javascript')
+call add(g:pathogen_disabled, 'vim-javascript')
 call add(g:pathogen_disabled, 'vim-pgsql')
 call add(g:pathogen_disabled, 'vim-ruby-debugger')
 call add(g:pathogen_disabled, 'vim-shuoulda')
@@ -189,6 +189,10 @@ set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " Remove trailing whitespaces and ^M chars
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
+  " from Gary Berhardt
+  "for ruby, autoindent with two spaces, always expand tabs
+ autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+ autocmd FileType python set sw=4 sts=4 et
 " }
 
 " Key (re)Mappings {
@@ -240,6 +244,9 @@ map <leader>e :edit %%
 map <leader>v :view %%
 " go to previously edited file
 nnoremap <leader><Leader> <C-^>
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
 
 "  insert the time in "03 Jan 2012" format
 command! InsertDate :normal a<c-r>=strftime('%d %b %Y')<cr>
