@@ -337,20 +337,20 @@ set vb t_vb=  "stupid bell gone
 " }
 
 " Plugin management {
-" " Command-t
-" let g:CommandTMatchWindowReverse=1
+" Command-t
+let g:CommandTMatchWindowReverse=1
 
 " " Make NERDTree's menu in each tab
 " autocmd VimEnter * silent NERDTree
 " autocmd BufEnter * silent NERDTreeMirror
 
 " Turn NERDTree on and off. Suggested by vim-nerdtree-tabs plugin
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+" map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " NERDTree not open on startup
-let g:nerdtree_tabs_open_on_gui_startup = 0
+" let g:nerdtree_tabs_open_on_gui_startup = 0
 
 " tagbar
-nnoremap <silent> <Leader>tt :TagbarToggle<CR>
+" nnoremap <silent> <Leader>tt :TagbarToggle<CR>
 
 " autocmd VimEnter * silent wincmd w
 " }
