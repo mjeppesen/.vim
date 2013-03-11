@@ -12,7 +12,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " I should make a vimscript function, but aaargh learning vimscript.
  let g:pathogen_disabled = []
 
-call add(g:pathogen_disabled, 'ctrlp.vim')
+" call add(g:pathogen_disabled, 'ctrlp.vim')
 " call add(g:pathogen_disabled, 'indexedsearch')
 " call add(g:pathogen_disabled, 'ir_black')
 " call add(g:pathogen_disabled, 'mjeppesen')
