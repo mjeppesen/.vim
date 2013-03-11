@@ -105,7 +105,7 @@ set directory=$HOME/.vimswap/ " Same for swap files
 set viewdir=$HOME/.vimviews/ " same for view files
 " set undo
 "" Creating directories if they don't exist
-silent execute '!mkdir -p $HVOME/.vimbackup'
+silent execute '!mkdir -p $HOME/.vimbackup'
 silent execute '!mkdir -p $HOME/.vimswap'
 silent execute '!mkdir -p $HOME/.vimviews'
 "au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
