@@ -12,7 +12,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " I should make a vimscript function, but aaargh learning vimscript.
  let g:pathogen_disabled = []
 
-" call add(g:pathogen_disabled, 'ctrlp.vim')
+call add(g:pathogen_disabled, 'ctrlp.vim')
 " call add(g:pathogen_disabled, 'indexedsearch')
 " call add(g:pathogen_disabled, 'ir_black')
 " call add(g:pathogen_disabled, 'mjeppesen')
@@ -56,6 +56,7 @@ call add(g:pathogen_disabled, 'vim-pgsql')
 call add(g:pathogen_disabled, 'vim-ruby-debugger')
 call add(g:pathogen_disabled, 'vim-shuoulda')
 call add(g:pathogen_disabled, 'vim-tmux')
+" call add(g:pathogen_disabled, 'CamelCaseMotion')
 
 call pathogen#infect()
 call pathogen#helptags()
@@ -290,9 +291,9 @@ imap [H g0
 " GUI Settings {
 if has('gui_running')
     set guioptions-=T " remove the toolbar
-    set guioptions-=r " remove the scrollbar
+    " set guioptions-=r " remove the scrollbar
     set guioptions-=L " remove the left scrollbar
-    set guifont=Consolas:h19
+    set guifont=Consolas:h16
     color solarized
     "set guifont=Monaco:h14
     "set guifont=Menlo\ Regular:h15
@@ -339,6 +340,7 @@ set vb t_vb=  "stupid bell gone
 " Plugin management {
 " Command-t
 let g:CommandTMatchWindowReverse=1
+nnoremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 
 " " Make NERDTree's menu in each tab
 " autocmd VimEnter * silent NERDTree
