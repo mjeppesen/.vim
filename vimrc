@@ -10,54 +10,28 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " Disable these plugins (only commented out lines are included! This is a
 " terrible way to make pathogen white-list rather than black-list.
 " I should make a vimscript function, but aaargh learning vimscript.
- let g:pathogen_disabled = []
+let g:pathogen_disabled = ['CamelCaseMotion', 'autojump.vim', 'command-t',
+    \ 'ctrlp.vim', 'gamsvim', 'gist', 'indexedsearch', 'ir_black', 'jquery',
+    \ 'mjeppesen', 'neocomplcache', 'nerdtree', 'snipmate-snippets', 'supertab',
+    \ 'syntastic', 'tabular', 'tagbar', 'tcomment', 'textile', 'tlib_vim',
+    \ 'vim-addon-mw-utils', 'vim-align', 'vim-coffee-script',
+    \ 'vim-colors-solarized', 'vim-commentary', 'vim-cucumber', 'vim-dbext',
+    \ 'vim-debug', 'vim-endwise', 'vim-fugitive', 'vim-git', 'vim-haml',
+    \ 'vim-javascript', 'vim-markdown', 'vim-matchit', 'vim-nerdtree-tabs',
+    \ 'vim-pathogen', 'vim-rails', 'vim-repeat', 'vim-ruby', 'vim-ruby-debugger',
+    \ 'vim-shoulda', 'vim-snipmate', 'vim-surround', 'vim-textobj-rubyblock',
+    \ 'vim-textobj-user', 'vim-tmux', 'vim-unimpaired', 'vim-vividchalk']
 
-call add(g:pathogen_disabled, 'ctrlp.vim')
-call add(g:pathogen_disabled, 'vim-debug') " sadly does not work
-" call add(g:pathogen_disabled, 'indexedsearch')
-" call add(g:pathogen_disabled, 'ir_black')
-" call add(g:pathogen_disabled, 'mjeppesen')
-call add(g:pathogen_disabled, 'snipmate-snippets')
-" call add(g:pathogen_disabled, 'supertab')
-" call add(g:pathogen_disabled, 'syntastic')
-call add(g:pathogen_disabled, 'tagbar')
-" call add(g:pathogen_disabled, 'tlib_vim')
-" call add(g:pathogen_disabled, 'vim-addon-mw-utils')
-" call add(g:pathogen_disabled, 'vim-colors-solarized')
-" call add(g:pathogen_disabled, 'vim-commentary')
-" call add(g:pathogen_disabled, 'vim-endwise')
-" call add(g:pathogen_disabled, 'vim-fugitive')
-" call add(g:pathogen_disabled, 'vim-git')
-" call add(g:pathogen_disabled, 'vim-haml')
-" call add(g:pathogen_disabled, 'vim-markdown')
-" call add(g:pathogen_disabled, 'vim-matchit')
-" call add(g:pathogen_disabled, 'vim-pathogen')
-" call add(g:pathogen_disabled, 'vim-rails')
-" call add(g:pathogen_disabled, 'vim-repeat')
-" call add(g:pathogen_disabled, 'vim-ruby')
-call add(g:pathogen_disabled, 'vim-snipmate')
-" call add(g:pathogen_disabled, 'vim-surround')
-" call add(g:pathogen_disabled, 'vim-textobj-rubyblock')
-" call add(g:pathogen_disabled, 'vim-textobj-user')
-" call add(g:pathogen_disabled, 'vim-unimpaired')
-call add(g:pathogen_disabled, 'vim-vividchalk')
-" call add(g:pathogen_disabled, 'command-t')
-call add(g:pathogen_disabled, 'gist')
-call add(g:pathogen_disabled, 'jquery')
-call add(g:pathogen_disabled, 'neocomplcache')
-" call add(g:pathogen_disabled, 'nerdtree')
-" call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
-" call add(g:pathogen_disabled, 'tabular')
-call add(g:pathogen_disabled, 'tcomment')
-call add(g:pathogen_disabled, 'textile')
-call add(g:pathogen_disabled, 'vim-cucumber')
-call add(g:pathogen_disabled, 'vim-dbext')
-call add(g:pathogen_disabled, 'vim-javascript')
-call add(g:pathogen_disabled, 'vim-pgsql')
-call add(g:pathogen_disabled, 'vim-ruby-debugger')
-call add(g:pathogen_disabled, 'vim-shuoulda')
-call add(g:pathogen_disabled, 'vim-tmux')
-" call add(g:pathogen_disabled, 'CamelCaseMotion')
+let g:pathogen_enabled = ['gamsvim', 'indexedsearch', 'ir_black',
+    \ 'mjeppesen', 'supertab', 'vim-colors-solarized', 'vim-fugitive', 'vim-git',
+    \ 'vim-matchit', 'vim-pathogen', 'vim-repeat', 'vim-ruby', 'vim-surround',
+    \ 'vim-unimpaired', 'command-t', 'neocomplcache', 'tabular', 'tcomment',
+    \ 'CamelCaseMotion']
+
+for item in g:pathogen_enabled
+  let j = index(g:pathogen_disabled, item)
+  call remove(g:pathogen_disabled, j)
+endfor
 
 call pathogen#infect()
 call pathogen#helptags()
