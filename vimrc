@@ -17,7 +17,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
  let g:pathogen_disabled = []
 
 call add(g:pathogen_disabled, 'ctrlp.vim')
-call add(g:pathogen_disabled, 'autojump.vim')
+call add(g:pathogen_disabled, 'vim-debug') " sadly does not work
 " call add(g:pathogen_disabled, 'indexedsearch')
 " call add(g:pathogen_disabled, 'ir_black')
 " call add(g:pathogen_disabled, 'mjeppesen')
@@ -49,9 +49,9 @@ call add(g:pathogen_disabled, 'vim-vividchalk')
 call add(g:pathogen_disabled, 'gist')
 call add(g:pathogen_disabled, 'jquery')
 call add(g:pathogen_disabled, 'neocomplcache')
-call add(g:pathogen_disabled, 'nerdtree')
-call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
-call add(g:pathogen_disabled, 'tabular')
+" call add(g:pathogen_disabled, 'nerdtree')
+" call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
+" call add(g:pathogen_disabled, 'tabular')
 call add(g:pathogen_disabled, 'tcomment')
 call add(g:pathogen_disabled, 'textile')
 call add(g:pathogen_disabled, 'vim-cucumber')
@@ -69,8 +69,6 @@ call pathogen#helptags()
 
 filetype plugin on
 syntax on
-
-
 
 " Most of the following from from spf13 and Gary Bernhardt's vimrc
 
@@ -105,7 +103,7 @@ if has('persistent_undo')
   set undofile " so is persistent undo ...
   set undoreload=10000 "maximum number lines to save for undo on a buffer reload
   set undodir=$HOME/.vimundo/ " and for undo files
-endif 
+endif
 
 " Moved to function at bottom of the file
 set backupdir=$HOME/.vimbackup/ " but not when they clog
@@ -195,12 +193,13 @@ set formatoptions+=tcroql " copied from gvimrc -- not sure
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType c,cpp,java,php,js,vim,python,twig,xml,yml,ruby,javascript,coffee,gams,markdown,scss,sass,sh autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
+autocmd BufNewFile,BufRead *.gms :set filetype=gams
   " from Gary Berhardt
   "for ruby, autoindent with two spaces, always expand tabs
  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
- autocmd FileType python set sw=4 sts=4 et
+ autocmd FileType python,gams set sw=4 sts=4 et
 " }
 
 " Key (re)Mappings {

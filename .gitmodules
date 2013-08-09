@@ -136,3 +136,9 @@
 [submodule "bundle/autojump.vim"]
 	path = bundle/autojump.vim
 	url = https://github.com/trotter/autojump.vim.git
+[submodule "vim-debug"]
+	path = bundle/vim-debug
+	url = https://github.com/jabapyth/vim-debug.git
+[submodule "bundle/gamsvim"]
+	path = bundle/gamsvim
+	url = https://github.com/mjeppesen/gamsvim.git
