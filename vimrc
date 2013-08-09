@@ -5,6 +5,10 @@
 
 set nocompatible
 
+if has('win32') || has('win64')
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif
+
 " Pathogen plugin management {
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 " Disable these plugins (only commented out lines are included! This is a
@@ -13,6 +17,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
  let g:pathogen_disabled = []
 
 call add(g:pathogen_disabled, 'ctrlp.vim')
+call add(g:pathogen_disabled, 'autojump.vim')
 " call add(g:pathogen_disabled, 'indexedsearch')
 " call add(g:pathogen_disabled, 'ir_black')
 " call add(g:pathogen_disabled, 'mjeppesen')
@@ -65,6 +70,8 @@ call pathogen#helptags()
 filetype plugin on
 syntax on
 
+
+
 " Most of the following from from spf13 and Gary Bernhardt's vimrc
 
 " General {
@@ -106,9 +113,9 @@ set directory=$HOME/.vimswap/ " Same for swap files
 set viewdir=$HOME/.vimviews/ " same for view files
 " set undo
 "" Creating directories if they don't exist
-silent execute '!mkdir -p $HOME/.vimbackup'
-silent execute '!mkdir -p $HOME/.vimswap'
-silent execute '!mkdir -p $HOME/.vimviews'
+" silent execute '!mkdir -p $HOME/.vimbackup'
+" silent execute '!mkdir -p $HOME/.vimswap'
+" silent execute '!mkdir -p $HOME/.vimviews'
 "au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 "au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
@@ -280,10 +287,10 @@ vnoremap > >gv
 
 " Fix home and end keybindings for screen, particularly on mac
 " - for some reason this fixes the arrow keys too. huh.
-map [F $
-imap [F $
-map [H g0
-imap [H g0
+" map [F $
+" imap [F $
+" map [H g0
+" imap [H g0
 " For when you forget to sudo.. Really Write the file.
 "cmap w!! w !sudo tee % >/dev/null
 " }
@@ -300,27 +307,32 @@ if has('gui_running')
     set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 "set lines=40 " 40 lines of text instead of 24,
-else
-  set term=builtin_ansi " Make arrow and other keys work
-  set t_Co=256 " 256 colors
+    else
+      if &term == 'xterm' || &term == 'screen'
+          set term=builtin_ansi " Make arrow and other keys work
+          set t_Co=256 " 256 colors
+      endif
 
+      " change cursor shape depending on mode
+      " only works in iTerm
+    if has('unix')
+      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    endif
 
-  " change cursor shape depending on mode
-  " only works in iTerm
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-  " set vim colors same as terminal (FRAGILE)
-  if $ITERM_PROFILE == 'Pastel'
-    color grb256
-    set background=dark
-  elseif $ITERM_PROFILE == 'Solarized Dark'
-    color solarized
-    set background=dark
-  else  " some good default
-    colo ir_black
-    set background=dark
-  endif
+    " set vim colors same as terminal (FRAGILE)
+    if has('mac')
+      if $ITERM_PROFILE == 'Pastel'
+        color grb256
+        set background=dark
+      elseif $ITERM_PROFILE == 'Solarized Dark'
+        color solarized
+        set background=dark
+      else  " some good default
+        colo ir_black
+        set background=dark
+      endif
+    endif
 endif
 
 set vb t_vb=  "stupid bell gone
