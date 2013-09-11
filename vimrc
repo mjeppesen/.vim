@@ -161,9 +161,9 @@ set formatoptions+=tcroql " copied from gvimrc -- not sure
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
+autocmd BufNewFile,BufRead *.gms :setfiletype gams
 autocmd FileType c,cpp,java,php,js,vim,python,twig,xml,yml,ruby,javascript,coffee,gams,markdown,scss,sass,sh autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
-autocmd BufNewFile,BufRead *.gms :set filetype=gams
   " from Gary Berhardt
   "for ruby, autoindent with two spaces, always expand tabs
  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
@@ -319,6 +319,15 @@ set vb t_vb=  "stupid bell gone
 " Command-t
 let g:CommandTMatchWindowReverse=1
 nnoremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+
+" StringComplete
+inoremap <C-J> <C-O>:set completefunc=StringComplete#GetList<CR><C-X><C-U>
+
+" Neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
+" for gams
+autocmd BufEnter *.gms :let g:tcommentOptions = {'col': 1}
 
 " " Make NERDTree's menu in each tab
 " autocmd VimEnter * silent NERDTree
