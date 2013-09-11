@@ -45,7 +45,7 @@ syntax on
 " General {
 set background=dark " Assume a dark background
     if !has('win32') && !has('win64')
-"        set term=$TERM " Make arrow and other keys work
+       set term=$TERM " Make arrow and other keys work
     endif
 filetype plugin indent on " Automatically detect file types.
 syntax on " syntax highlighting
@@ -283,8 +283,10 @@ else
 
   " change cursor shape depending on mode
   " only works in iTerm
+if has('mac')
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
   " set vim colors same as terminal (FRAGILE)
   if $ITERM_PROFILE == 'Pastel'
@@ -292,7 +294,9 @@ else
     set background=dark
   elseif $ITERM_PROFILE == 'Solarized Dark'
     color solarized
-    set background=dark
+  elseif $ITERM_PROFILE == 'Solarized Light'
+    color solarized
+    set background=light
   else  " some good default
     colo ir_black
     set background=dark
@@ -393,18 +397,6 @@ map <leader>n :call RenameFile()<cr>
 "   endtry
 " endfunction
 
-" }
-
-" Custom menus to help me remember {
-amenu Cool\ Stuff.Close\ other\windows\ \:only :only<CR>
-amenu Cool\ Stuff.Vim\ diff\ put\ changes\ across\ \:diffput :diffput<CR>
-amenu Cool\ Stuff.Edit\ vimrc\ \ \ :sp ~/.vim/vimrc<CR>
-amenu Cool\ Stuff.Put\ cursor\ middle\ of\ screen\ zz zz
-amenu Cool\ Stuff.Go\ last\ edit\ \ \ '0 '0
-amenu Cool\ Stuff.Make\ windows\ vertical\ \ <CTRL-W>\ H <CTRL-W> H
-amenu Cool\ Stuff.Make\ windows\ vertical\ \ <CTRL-W>\ K <CTRL-W> K
-amenu Cool\ Stuff.Comment\ out\ \ \ :'<,'>s/^/#/  :'<,'>s/^/#/<CR>
-amenu Cool\ Stuff.Uncomment\ \ \ :'<,'>s/#// :'<,'>s/#//<CR>
 " }
 
 " Use local vimrc if available {
