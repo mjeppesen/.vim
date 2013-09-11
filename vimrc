@@ -114,7 +114,7 @@ endif
 
 if has('statusline')
   set laststatus=2
-  set statusline=\ \ %<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+  set statusline=\ \ %<%f\ (%{&ft})\ %{tolower(fugitive#statusline())}\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
   " Gary Bernhardt's statusline:
   " set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
@@ -131,7 +131,7 @@ endif
 
 set backspace=indent,eol,start " backspace for dummys
 set linespace=0 " No extra spaces between rows
-set nu " Line numbers on
+set number " Line numbers on
 set showmatch " show matching brackets/parenthesis
 set incsearch " find as you type search
 set hlsearch " highlight search terms
@@ -147,8 +147,6 @@ set foldenable " auto fold code
 set gdefault " the /g flag on :s substitutions by default
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
-
-
 " }
 
 " Formatting {
