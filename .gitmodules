@@ -142,3 +142,6 @@
 [submodule "bundle/gamsvim"]
 	path = bundle/gamsvim
 	url = https://github.com/mjeppesen/gamsvim.git
+[submodule "bundle/StringComplete"]
+	path = bundle/StringComplete
+	url = https://github.com/vim-scripts/StringComplete.git
