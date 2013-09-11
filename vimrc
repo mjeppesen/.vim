@@ -64,14 +64,14 @@ set history=1000 " Store a ton of history (default is 20)
 set nospell " spell checking off
 " Setting up the directories {
 set backup " backups are nice ...
-set undolevels=1000 "maximum number of changes that can be undone
+set undolevels=100 "maximum number of changes that can be undone
 
 set splitright " split buffers to the right
 set splitbelow " vertical split buffers below
 
 if has('persistent_undo')
   set undofile " so is persistent undo ...
-  set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+  set undoreload=100 "maximum number lines to save for undo on a buffer reload
   set undodir=$HOME/.vimundo/ " and for undo files
 endif
 
