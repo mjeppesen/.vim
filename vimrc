@@ -17,6 +17,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
  let g:pathogen_disabled = []
 
 call add(g:pathogen_disabled, 'ctrlp.vim')
+call add(g:pathogen_disabled, 'autojump.vim')
 call add(g:pathogen_disabled, 'vim-debug') " sadly does not work
 " call add(g:pathogen_disabled, 'indexedsearch')
 " call add(g:pathogen_disabled, 'ir_black')
