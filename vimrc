@@ -14,55 +14,58 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " Disable these plugins (only commented out lines are included! This is a
 " terrible way to make pathogen white-list rather than black-list.
 " I should make a vimscript function, but aaargh learning vimscript.
- let g:pathogen_disabled = []
+let g:pathogen_disabled = ['CamelCaseMotion', 'autojump.vim', 'command-t',
+    \ 'ctrlp.vim', 'gamsvim', 'gist', 'indexedsearch', 'ir_black', 'jquery',
+    \ 'mjeppesen', 'neocomplcache', 'nerdtree', 'snipmate-snippets', 'supertab',
+    \ 'syntastic', 'tabular', 'tagbar', 'tcomment', 'textile', 'tlib_vim',
+    \ 'vim-addon-mw-utils', 'vim-align', 'vim-coffee-script', 'ctrlp.vim',
+    \ 'vim-colors-solarized', 'vim-commentary', 'vim-cucumber', 'vim-dbext',
+    \ 'vim-debug', 'vim-endwise', 'vim-fugitive', 'vim-git', 'vim-haml',
+    \ 'vim-javascript', 'vim-markdown', 'vim-matchit', 'vim-nerdtree-tabs',
+    \ 'vim-pathogen', 'vim-rails', 'vim-repeat', 'vim-ruby', 'vim-ruby-debugger',
+    \ 'vim-shoulda', 'vim-snipmate', 'vim-surround', 'vim-textobj-rubyblock',
+    \ 'vim-textobj-user', 'vim-tmux', 'vim-unimpaired', 'vim-vividchalk']
 
-call add(g:pathogen_disabled, 'ctrlp.vim')
-call add(g:pathogen_disabled, 'autojump.vim')
-call add(g:pathogen_disabled, 'vim-debug') " sadly does not work
-" call add(g:pathogen_disabled, 'indexedsearch')
-" call add(g:pathogen_disabled, 'ir_black')
-" call add(g:pathogen_disabled, 'mjeppesen')
-call add(g:pathogen_disabled, 'snipmate-snippets')
-" call add(g:pathogen_disabled, 'supertab')
-" call add(g:pathogen_disabled, 'syntastic')
-call add(g:pathogen_disabled, 'tagbar')
-" call add(g:pathogen_disabled, 'tlib_vim')
-" call add(g:pathogen_disabled, 'vim-addon-mw-utils')
-" call add(g:pathogen_disabled, 'vim-colors-solarized')
-" call add(g:pathogen_disabled, 'vim-commentary')
-call add(g:pathogen_disabled, 'vim-endwise')
-" call add(g:pathogen_disabled, 'vim-fugitive')
-" call add(g:pathogen_disabled, 'vim-git')
-" call add(g:pathogen_disabled, 'vim-haml')
-" call add(g:pathogen_disabled, 'vim-markdown')
-" call add(g:pathogen_disabled, 'vim-matchit')
-call add(g:pathogen_disabled, 'vim-pathogen')
-call add(g:pathogen_disabled, 'vim-rails')
-" call add(g:pathogen_disabled, 'vim-repeat')
-" call add(g:pathogen_disabled, 'vim-ruby')
-call add(g:pathogen_disabled, 'vim-snipmate')
-" call add(g:pathogen_disabled, 'vim-surround')
-call add(g:pathogen_disabled, 'vim-textobj-rubyblock')
-call add(g:pathogen_disabled, 'vim-textobj-user')
-" call add(g:pathogen_disabled, 'vim-unimpaired')
-call add(g:pathogen_disabled, 'vim-vividchalk')
-" call add(g:pathogen_disabled, 'command-t')
-call add(g:pathogen_disabled, 'gist')
-call add(g:pathogen_disabled, 'jquery')
-call add(g:pathogen_disabled, 'neocomplcache')
-call add(g:pathogen_disabled, 'nerdtree')
-call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
-" call add(g:pathogen_disabled, 'tabular')
-call add(g:pathogen_disabled, 'tcomment')
-call add(g:pathogen_disabled, 'textile')
-call add(g:pathogen_disabled, 'vim-cucumber')
-call add(g:pathogen_disabled, 'vim-dbext')
-call add(g:pathogen_disabled, 'vim-javascript')
-call add(g:pathogen_disabled, 'vim-pgsql')
-call add(g:pathogen_disabled, 'vim-ruby-debugger')
-call add(g:pathogen_disabled, 'vim-shuoulda')
-call add(g:pathogen_disabled, 'vim-tmux')
-" call add(g:pathogen_disabled, 'CamelCaseMotion')
+let g:pathogen_enabled = ['gamsvim', 'indexedsearch', 'ir_black', 'ctrlp.vim'
+    \ 'mjeppesen', 'supertab', 'vim-colors-solarized', 'vim-fugitive', 'vim-git',
+    \ 'vim-matchit', 'vim-pathogen', 'vim-repeat', 'vim-ruby', 'vim-surround',
+    \ 'vim-unimpaired', '', 'neocomplcache', 'tabular', 'tcomment',
+    \ 'CamelCaseMotion']
+
+for item in g:pathogen_enabled
+  let j = index(g:pathogen_disabled, item)
+  call remove(g:pathogen_disabled, j)
+endfor
+
+call pathogen#infect()
+call pathogen#helptags()
+" }
+
+filetype plugin on
+syntax on
+
+" Most of the following from from spf13 and Gary Bernhardt's vimrc
+
+" General {
+set background=dark " Assume a dark background
+    if !has('win32') && !has('win64')
+       set term=$TERM " Make arrow and other keys work
+    endif
+filetype plugin indent on " Automatically detect file types.
+syntax on " syntax highlighting
+set mouse=a " automatically enable mouse usage
+"set autochdir " always switch to the current file directory. Messes with some plugins, best left commented out
+" not every vim is compiled with this, use the following line instead
+" If you use command-t plugin, it conflicts with this, comment it out.
+"autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+scriptencoding utf-8
+
+" set autowrite " automatically write a file when leaving a modified buffer
+set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
+set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
+set virtualedit=onemore " allow for cursor beyond last character
+set history=1000 " Store a ton of history (default is 20)
+set nospell " spell checking off
 
 call pathogen#infect()
 call pathogen#helptags()
@@ -95,14 +98,14 @@ set history=1000 " Store a ton of history (default is 20)
 set nospell " spell checking off
 " Setting up the directories {
 set backup " backups are nice ...
-set undolevels=1000 "maximum number of changes that can be undone
+set undolevels=100 "maximum number of changes that can be undone
 
 set splitright " split buffers to the right
 set splitbelow " vertical split buffers below
 
 if has('persistent_undo')
   set undofile " so is persistent undo ...
-  set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+  set undoreload=100 "maximum number lines to save for undo on a buffer reload
   set undodir=$HOME/.vimundo/ " and for undo files
 endif
 
@@ -145,7 +148,7 @@ endif
 
 if has('statusline')
   set laststatus=2
-  set statusline=\ \ %<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+  set statusline=\ \ %<%f\ (%{&ft})\ %{tolower(fugitive#statusline())}\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
   " Gary Bernhardt's statusline:
   " set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
@@ -162,7 +165,7 @@ endif
 
 set backspace=indent,eol,start " backspace for dummys
 set linespace=0 " No extra spaces between rows
-set nu " Line numbers on
+set number " Line numbers on
 set showmatch " show matching brackets/parenthesis
 set incsearch " find as you type search
 set hlsearch " highlight search terms
@@ -178,8 +181,6 @@ set foldenable " auto fold code
 set gdefault " the /g flag on :s substitutions by default
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
-
-
 " }
 
 " Formatting {
@@ -194,9 +195,9 @@ set formatoptions+=tcroql " copied from gvimrc -- not sure
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
+autocmd BufNewFile,BufRead *.gms :setfiletype gams
 autocmd FileType c,cpp,java,php,js,vim,python,twig,xml,yml,ruby,javascript,coffee,gams,markdown,scss,sass,sh autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
-autocmd BufNewFile,BufRead *.gms :set filetype=gams
   " from Gary Berhardt
   "for ruby, autoindent with two spaces, always expand tabs
  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
@@ -354,6 +355,15 @@ set vb t_vb=  "stupid bell gone
 let g:CommandTMatchWindowReverse=1
 nnoremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 
+" StringComplete
+inoremap <C-J> <C-O>:set completefunc=StringComplete#GetList<CR><C-X><C-U>
+
+" Neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
+" for gams
+autocmd BufEnter *.gms :let g:tcommentOptions = {'col': 1}
+
 " " Make NERDTree's menu in each tab
 " autocmd VimEnter * silent NERDTree
 " autocmd BufEnter * silent NERDTreeMirror
@@ -429,18 +439,6 @@ map <leader>n :call RenameFile()<cr>
 "   endtry
 " endfunction
 
-" }
-
-" Custom menus to help me remember {
-amenu Cool\ Stuff.Close\ other\windows\ \:only :only<CR>
-amenu Cool\ Stuff.Vim\ diff\ put\ changes\ across\ \:diffput :diffput<CR>
-amenu Cool\ Stuff.Edit\ vimrc\ \ \ :sp ~/.vim/vimrc<CR>
-amenu Cool\ Stuff.Put\ cursor\ middle\ of\ screen\ zz zz
-amenu Cool\ Stuff.Go\ last\ edit\ \ \ '0 '0
-amenu Cool\ Stuff.Make\ windows\ vertical\ \ <CTRL-W>\ H <CTRL-W> H
-amenu Cool\ Stuff.Make\ windows\ vertical\ \ <CTRL-W>\ K <CTRL-W> K
-amenu Cool\ Stuff.Comment\ out\ \ \ :'<,'>s/^/#/  :'<,'>s/^/#/<CR>
-amenu Cool\ Stuff.Uncomment\ \ \ :'<,'>s/#// :'<,'>s/#//<CR>
 " }
 
 " Use local vimrc if available {
