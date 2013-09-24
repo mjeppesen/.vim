@@ -145,3 +145,6 @@
 [submodule "bundle/StringComplete"]
 	path = bundle/StringComplete
 	url = https://github.com/vim-scripts/StringComplete.git
+[submodule "bundle/vim-conque"]
+	path = bundle/vim-conque
+	url = https://github.com/basepi/vim-conque.git
