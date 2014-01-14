@@ -148,3 +148,6 @@
 [submodule "bundle/vim-conque"]
 	path = bundle/vim-conque
 	url = https://github.com/basepi/vim-conque.git
+[submodule "bundle/selecta"]
+	path = bundle/selecta
+	url = https://github.com/garybernhardt/selecta.git
