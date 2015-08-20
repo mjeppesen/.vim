@@ -13,6 +13,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
  let g:pathogen_disabled = []
 
 call add(g:pathogen_disabled, 'ctrlp.vim')
+call add(g:pathogen_disabled, 'autojump.vim')
 " call add(g:pathogen_disabled, 'indexedsearch')
 " call add(g:pathogen_disabled, 'ir_black')
 " call add(g:pathogen_disabled, 'mjeppesen')
@@ -23,20 +24,20 @@ call add(g:pathogen_disabled, 'tagbar')
 " call add(g:pathogen_disabled, 'tlib_vim')
 " call add(g:pathogen_disabled, 'vim-addon-mw-utils')
 " call add(g:pathogen_disabled, 'vim-colors-solarized')
-" call add(g:pathogen_disabled, 'vim-commentary')
+call add(g:pathogen_disabled, 'vim-commentary')
 call add(g:pathogen_disabled, 'vim-endwise')
 " call add(g:pathogen_disabled, 'vim-fugitive')
 " call add(g:pathogen_disabled, 'vim-git')
-" call add(g:pathogen_disabled, 'vim-haml')
-" call add(g:pathogen_disabled, 'vim-markdown')
+call add(g:pathogen_disabled, 'vim-haml')
+call add(g:pathogen_disabled, 'vim-markdown')
 " call add(g:pathogen_disabled, 'vim-matchit')
 " call add(g:pathogen_disabled, 'vim-pathogen')
-" call add(g:pathogen_disabled, 'vim-rails')
+call add(g:pathogen_disabled, 'vim-rails')
 " call add(g:pathogen_disabled, 'vim-repeat')
-" call add(g:pathogen_disabled, 'vim-ruby')
+call add(g:pathogen_disabled, 'vim-ruby')
 call add(g:pathogen_disabled, 'vim-snipmate')
 " call add(g:pathogen_disabled, 'vim-surround')
-" call add(g:pathogen_disabled, 'vim-textobj-rubyblock')
+call add(g:pathogen_disabled, 'vim-textobj-rubyblock')
 " call add(g:pathogen_disabled, 'vim-textobj-user')
 " call add(g:pathogen_disabled, 'vim-unimpaired')
 call add(g:pathogen_disabled, 'vim-vividchalk')
@@ -47,7 +48,7 @@ call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'nerdtree')
 call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
 call add(g:pathogen_disabled, 'tabular')
-call add(g:pathogen_disabled, 'tcomment')
+" call add(g:pathogen_disabled, 'tcomment')
 call add(g:pathogen_disabled, 'textile')
 call add(g:pathogen_disabled, 'vim-cucumber')
 call add(g:pathogen_disabled, 'vim-dbext')
@@ -96,14 +97,15 @@ set splitbelow " vertical split buffers below
 
 if has('persistent_undo')
   set undofile " so is persistent undo ...
-  set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-  set undodir=$HOME/.vimundo/ " and for undo files
+  set undoreload=100 "maximum number lines to save for undo on a buffer reload
+  set undodir=$HOME/.vimundo " and for undo files
+  " set undodir=$HOME/.vimundo/ " and for undo files
 endif 
 
 " Moved to function at bottom of the file
-set backupdir=$HOME/.vimbackup/ " but not when they clog
-set directory=$HOME/.vimswap/ " Same for swap files
-set viewdir=$HOME/.vimviews/ " same for view files
+set backupdir=$HOME/.vimbackup " but not when they clog
+set directory=$HOME/.vimswap " Same for swap files
+set viewdir=$HOME/.vimviews " same for view files
 " set undo
 "" Creating directories if they don't exist
 silent execute '!mkdir -p $HOME/.vimbackup'
@@ -188,7 +190,7 @@ set formatoptions+=tcroql " copied from gvimrc -- not sure
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType matlab,c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
   " from Gary Berhardt
   "for ruby, autoindent with two spaces, always expand tabs
@@ -324,6 +326,7 @@ else
 endif
 
 set vb t_vb=  "stupid bell gone
+set novisualbell " stupid bell gone
 
 " Macvim: run these commands from the terminal if tab names are being
 " abbreviated (adjust numbers as necessary):
@@ -341,6 +344,9 @@ set vb t_vb=  "stupid bell gone
 " Command-t
 let g:CommandTMatchWindowReverse=1
 nnoremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+
+" for gams
+autocmd BufEnter *.gms :let g:tcommentOptions = {'col': 1}
 
 " " Make NERDTree's menu in each tab
 " autocmd VimEnter * silent NERDTree
