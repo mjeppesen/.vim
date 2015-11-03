@@ -190,7 +190,7 @@ set formatoptions+=tcroql " copied from gvimrc -- not sure
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
-autocmd FileType matlab,c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType matlab,c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh,gams autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
   " from Gary Berhardt
   "for ruby, autoindent with two spaces, always expand tabs
@@ -288,6 +288,12 @@ map [H g0
 imap [H g0
 " For when you forget to sudo.. Really Write the file.
 "cmap w!! w !sudo tee % >/dev/null
+
+" for autohotkey and matlab, for the CTRL-L hotkey
+vnoremap  Y
+nnoremap  Y
+
+"
 " }
 
 " GUI Settings {
@@ -300,6 +306,7 @@ if has('gui_running')
     "set guifont=Monaco:h14
     "set guifont=Menlo\ Regular:h15
     set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+
 
 "set lines=40 " 40 lines of text instead of 24,
 else
@@ -327,6 +334,7 @@ endif
 
 set vb t_vb=  "stupid bell gone
 set novisualbell " stupid bell gone
+set noeb " stupid bell gone
 
 " Macvim: run these commands from the terminal if tab names are being
 " abbreviated (adjust numbers as necessary):
@@ -347,6 +355,7 @@ nnoremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 
 " for gams
 autocmd BufEnter *.gms :let g:tcommentOptions = {'col': 1}
+autocmd BufEnter *.gms :set ft=gams
 
 " " Make NERDTree's menu in each tab
 " autocmd VimEnter * silent NERDTree
@@ -371,7 +380,18 @@ function! EditTextLikeConventionalEditors()
   set linebreak
   set nolist " linebreak does not work if list is on
   set spell
+" show the line at the bottom of the screen even if only partially
+  set display=lastline 
 endfunction
+
+" run this in each side window
+function! FocusMode()
+  " hide ~ in side windows
+  hi NonText guifg=bg 
+  " remove numbers
+  set nonumber
+endfunction
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
