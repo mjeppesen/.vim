@@ -12,7 +12,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " I should make a vimscript function, but aaargh learning vimscript.
  let g:pathogen_disabled = []
 
-call add(g:pathogen_disabled, 'ctrlp.vim')
+" call add(g:pathogen_disabled, 'ctrlp.vim')
 call add(g:pathogen_disabled, 'autojump.vim')
 " call add(g:pathogen_disabled, 'indexedsearch')
 " call add(g:pathogen_disabled, 'ir_black')
@@ -20,7 +20,7 @@ call add(g:pathogen_disabled, 'autojump.vim')
 call add(g:pathogen_disabled, 'snipmate-snippets')
 " call add(g:pathogen_disabled, 'supertab')
 " call add(g:pathogen_disabled, 'syntastic')
-call add(g:pathogen_disabled, 'tagbar')
+" call add(g:pathogen_disabled, 'tagbar')
 " call add(g:pathogen_disabled, 'tlib_vim')
 " call add(g:pathogen_disabled, 'vim-addon-mw-utils')
 " call add(g:pathogen_disabled, 'vim-colors-solarized')
@@ -45,8 +45,8 @@ call add(g:pathogen_disabled, 'vim-vividchalk')
 call add(g:pathogen_disabled, 'gist')
 call add(g:pathogen_disabled, 'jquery')
 call add(g:pathogen_disabled, 'neocomplcache')
-call add(g:pathogen_disabled, 'nerdtree')
-call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
+" call add(g:pathogen_disabled, 'nerdtree')
+" call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
 call add(g:pathogen_disabled, 'tabular')
 " call add(g:pathogen_disabled, 'tcomment')
 call add(g:pathogen_disabled, 'textile')
@@ -88,6 +88,9 @@ set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatib
 set virtualedit=onemore " allow for cursor beyond last character
 set history=1000 " Store a ton of history (default is 20)
 set nospell " spell checking off
+
+set clipboard=unnamed " use system clipboard 
+
 " Setting up the directories {
 set backup " backups are nice ...
 set undolevels=1000 "maximum number of changes that can be undone
@@ -190,12 +193,12 @@ set formatoptions+=tcroql " copied from gvimrc -- not sure
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
-autocmd FileType matlab,c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh,gams autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType matlab,c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh,gams,tex autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
   " from Gary Berhardt
   "for ruby, autoindent with two spaces, always expand tabs
  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
- autocmd FileType python set sw=4 sts=4 et
+ autocmd FileType python,matlab set sw=4 sts=4 et
 " }
 
 " Key (re)Mappings {
@@ -290,7 +293,7 @@ imap [H g0
 "cmap w!! w !sudo tee % >/dev/null
 
 " for autohotkey and matlab, for the CTRL-L hotkey
-vnoremap  Y
+vnoremap  y 
 nnoremap  Y
 
 "
@@ -306,6 +309,8 @@ if has('gui_running')
     "set guifont=Monaco:h14
     "set guifont=Menlo\ Regular:h15
     set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+    " don't highlight the cursor line number
+    hi! link CursorLineNr CursorLine 
 
 
 "set lines=40 " 40 lines of text instead of 24,
