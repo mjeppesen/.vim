@@ -19,7 +19,7 @@ call add(g:pathogen_disabled, 'autojump.vim')
 " call add(g:pathogen_disabled, 'mjeppesen')
 call add(g:pathogen_disabled, 'snipmate-snippets')
 " call add(g:pathogen_disabled, 'supertab')
-" call add(g:pathogen_disabled, 'syntastic')
+call add(g:pathogen_disabled, 'syntastic')
 " call add(g:pathogen_disabled, 'tagbar')
 " call add(g:pathogen_disabled, 'tlib_vim')
 " call add(g:pathogen_disabled, 'vim-addon-mw-utils')
@@ -44,9 +44,9 @@ call add(g:pathogen_disabled, 'vim-vividchalk')
 " call add(g:pathogen_disabled, 'command-t')
 call add(g:pathogen_disabled, 'gist')
 call add(g:pathogen_disabled, 'jquery')
-call add(g:pathogen_disabled, 'neocomplcache')
-" call add(g:pathogen_disabled, 'nerdtree')
-" call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
+" call add(g:pathogen_disabled, 'neocomplcache')
+call add(g:pathogen_disabled, 'nerdtree')
+call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
 call add(g:pathogen_disabled, 'tabular')
 " call add(g:pathogen_disabled, 'tcomment')
 call add(g:pathogen_disabled, 'textile')
@@ -86,7 +86,7 @@ scriptencoding utf-8
 set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
 set virtualedit=onemore " allow for cursor beyond last character
-set history=1000 " Store a ton of history (default is 20)
+set history=10000 " Store a ton of history (default is 20)
 set nospell " spell checking off
 
 set clipboard=unnamed " use system clipboard 
@@ -101,14 +101,13 @@ set splitbelow " vertical split buffers below
 if has('persistent_undo')
   set undofile " so is persistent undo ...
   set undoreload=100 "maximum number lines to save for undo on a buffer reload
-  set undodir=$HOME/.vimundo " and for undo files
-  " set undodir=$HOME/.vimundo/ " and for undo files
+  set undodir=$USERPROFILE/.vimundo " and for undo files
 endif 
 
 " Moved to function at bottom of the file
-set backupdir=$HOME/.vimbackup " but not when they clog
-set directory=$HOME/.vimswap " Same for swap files
-set viewdir=$HOME/.vimviews " same for view files
+set backupdir=$USERPROFILE/.vimbackup " but not when they clog
+set directory=$USERPROFILE/.vimswap " Same for swap files
+set viewdir=$USERPROFILE/.vimviews " same for view files
 " set undo
 "" Creating directories if they don't exist
 silent execute '!mkdir -p $HOME/.vimbackup'
@@ -308,7 +307,7 @@ if has('gui_running')
     color solarized
     "set guifont=Monaco:h14
     "set guifont=Menlo\ Regular:h15
-    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor-blinkon0,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkon0
     " don't highlight the cursor line number
     hi! link CursorLineNr CursorLine 
 
@@ -336,6 +335,10 @@ else
     set background=dark
   endif
 endif
+
+" TODO matlab syntax highlight put elsewhere
+" syn match matlabFoo /%%.*$/ 
+" hi link matlabFoo TabLineFill
 
 set vb t_vb=  "stupid bell gone
 set novisualbell " stupid bell gone
@@ -387,6 +390,8 @@ function! EditTextLikeConventionalEditors()
   set spell
 " show the line at the bottom of the screen even if only partially
   set display=lastline 
+    set scrolljump=1 " lines to scroll when cursor leaves screen
+    set scrolloff=0 " minimum lines to keep above and below cursor
 endfunction
 
 " run this in each side window
@@ -467,4 +472,13 @@ amenu Cool\ Stuff.Uncomment\ \ \ :'<,'>s/#// :'<,'>s/#//<CR>
         source ~/.vim/vimrc.local
     endif
 " }
+
+" notes
+" zero width match:
+" to match a line but not include a semicolor which ends a line if it is there:
+" i.e. should match both "foo" and "bar" does not work yet
+" /\v.*(;\s*)@=
+" foo;
+" bar
+
 
