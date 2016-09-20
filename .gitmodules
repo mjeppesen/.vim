@@ -142,3 +142,6 @@
 [submodule "bundle/gamsvim"]
 	path = bundle/gamsvim
 	url = https://github.com/mjeppesen/gamsvim.git
+[submodule "misc/gvimfullscreen"]
+	path = misc/gvimfullscreen
+	url = https://github.com/derekmcloughlin/gvimfullscreen_win32.git
