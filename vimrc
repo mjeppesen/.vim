@@ -192,7 +192,7 @@ set formatoptions+=tcroql " copied from gvimrc -- not sure
 set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 " set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
-autocmd FileType matlab,c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh,gams,tex autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType matlab,c,cpp,java,php,js,python,twig,xml,yml,ruby,javascript,coffee,haml,markdown,scss,sass,sh,gams,tex,autohotkey autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 au BufNewFile,BufRead *.sql :set filetype=pgsql
   " from Gary Berhardt
   "for ruby, autoindent with two spaces, always expand tabs
@@ -295,6 +295,9 @@ imap [H g0
 vnoremap  y 
 nnoremap  Y
 
+
+
+
 "
 " }
 
@@ -303,7 +306,7 @@ if has('gui_running')
     set guioptions-=T " remove the toolbar
     " set guioptions-=r " remove the scrollbar
     set guioptions-=L " remove the left scrollbar
-    set guifont=Consolas:h16
+    set guifont=Consolas:h14
     color solarized
     "set guifont=Monaco:h14
     "set guifont=Menlo\ Regular:h15
@@ -311,6 +314,13 @@ if has('gui_running')
     " don't highlight the cursor line number
     hi! link CursorLineNr CursorLine 
 
+
+" use this to see the syntax thing under the cursor
+" :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'  . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"
+
+" highlight matlab function names
+" syn region matlabFunctionDefinition start='\(function\s\+\w\+\s\+=\s\+\)\@<=\w\+' end='('me=e-2
+" hi link matlabFunctionDefinition PreProc
 
 "set lines=40 " 40 lines of text instead of 24,
 else
