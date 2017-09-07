@@ -306,7 +306,7 @@ if has('gui_running')
     set guioptions-=T " remove the toolbar
     " set guioptions-=r " remove the scrollbar
     set guioptions-=L " remove the left scrollbar
-    set guifont=Consolas:h14
+    set guifont=Consolas:h16
     color solarized
     "set guifont=Monaco:h14
     "set guifont=Menlo\ Regular:h15
